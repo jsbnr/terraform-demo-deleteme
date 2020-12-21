@@ -1,8 +1,8 @@
 
 variable "policyId" {}
-variable "cpu_critical" {}
-variable "cpu_warning" {}
-variable "disk_percent" {}
+variable "cpu_critical" { default=90 }
+variable "cpu_warning" { default=80 }
+variable "disk_percent" { default=75 }
 
 resource "newrelic_infra_alert_condition" "CPUHot" {
   policy_id = var.policyId
