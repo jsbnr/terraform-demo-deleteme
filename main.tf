@@ -1,5 +1,8 @@
 
 variable "policyId" {}
+variable "cpu_critical" {}
+variable "cpu_warning" {}
+variable "disk_percent" {}
 
 resource "newrelic_infra_alert_condition" "CPUHot" {
   policy_id = var.policyId
@@ -13,13 +16,13 @@ resource "newrelic_infra_alert_condition" "CPUHot" {
 
   critical {
     duration      = 5
-    value         = 90
+    value         = var.cpu_critical
     time_function = "all"
   }
 
   warning {
     duration      = 5
-    value         = 80
+    value         = var.cpu_warning
     time_function = "all"
   }
 }
@@ -36,7 +39,7 @@ resource "newrelic_infra_alert_condition" "DiskHigh" {
 
   critical {
     duration      = 25
-    value         = 90
+    value         = var.disk_percent
     time_function = "all"
   }
 
